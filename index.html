@@ -395,6 +395,60 @@
   .pill-red { background: var(--red-light); color: #b91c1c; }
   .pill-amber { background: var(--amber-light); color: #b45309; }
   .pill-blue { background: var(--blue-light); color: #1d4ed8; }
+
+  /* ===== RESPONSIVE ===== */
+
+  @media (max-width: 768px) {
+    .cover { padding: 36px 24px 32px; }
+    .cover-title { font-size: 36px; }
+    .cover-sub { font-size: 14px; margin-bottom: 24px; }
+    .cover-meta { gap: 20px; }
+    .body { padding: 32px 24px; }
+    .section { margin-bottom: 36px; }
+    .section-title { font-size: 16px; }
+    .metrics-row { grid-template-columns: repeat(2, 1fr); }
+    .metrics-row-3 { grid-template-columns: repeat(2, 1fr); }
+    .metric-val { font-size: 22px; }
+    .insights-grid { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .camp-grid { grid-template-columns: 1fr; }
+    .compare-table { font-size: 12px; }
+    .compare-table th, .compare-table td { padding: 8px 10px; }
+    .footer { flex-direction: column; gap: 6px; text-align: center; padding: 20px 24px; }
+  }
+
+  @media (max-width: 480px) {
+    .cover { padding: 28px 16px 24px; }
+    .cover-title { font-size: 28px; }
+    .cover-label { font-size: 10px; }
+    .cover-meta { flex-direction: column; gap: 12px; }
+    .client-badges { flex-wrap: wrap; }
+    .body { padding: 24px 16px; }
+    .section { margin-bottom: 28px; }
+    .section-title { font-size: 15px; }
+    .section-header { gap: 8px; }
+    .metrics-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .metrics-row-3 { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .metric-card { padding: 14px 12px; }
+    .metric-val { font-size: 20px; }
+    .metric-label { font-size: 9px; }
+    .metric-change { font-size: 11px; }
+    .chart-wrap { padding: 14px; }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .compare-table { min-width: 480px; font-size: 11px; }
+    .compare-table th, .compare-table td { padding: 7px 8px; }
+    .pill { font-size: 10px; padding: 2px 7px; }
+    .rec-item { gap: 10px; }
+    .rec-desc { font-size: 11px; }
+    .footer { padding: 16px; font-size: 10px; }
+  }
+
+  @media print {
+    .page { max-width: 100%; }
+    .cover { padding: 40px; }
+    .body { padding: 32px 40px; }
+    .page-break { page-break-before: always; }
+  }
 </style>
 </head>
 <body>
@@ -572,7 +626,7 @@
       <!-- Landing page breakdown -->
       <div class="chart-wrap" style="margin-bottom:16px;">
         <div class="chart-title">Landing Page Traffic — Storimatic</div>
-        <table class="compare-table">
+        <div class="table-scroll"><table class="compare-table">
           <thead>
             <tr>
               <th>Landing Page</th>
@@ -613,6 +667,7 @@
             </tr>
           </tbody>
         </table>
+</div>
       </div>
 
       <div class="insights-grid">
@@ -697,7 +752,7 @@
       <!-- Landing page breakdown -->
       <div class="chart-wrap" style="margin-bottom:16px;">
         <div class="chart-title">Landing Page Traffic — Omega Ready Mix</div>
-        <table class="compare-table">
+        <div class="table-scroll"><table class="compare-table">
           <thead>
             <tr>
               <th>Landing Page</th>
@@ -738,6 +793,7 @@
             </tr>
           </tbody>
         </table>
+</div>
       </div>
 
       <div class="insights-grid">
@@ -782,7 +838,7 @@
         </div>
       </div>
 
-      <table class="compare-table">
+      <div class="table-scroll"><table class="compare-table">
         <thead>
           <tr>
             <th>Chỉ số</th>
@@ -836,6 +892,7 @@
           </tr>
         </tbody>
       </table>
+</div>
     </div>
 
     <!-- ========== SECTION 5: ĐÁNH GIÁ BRANDING ========== -->
@@ -861,7 +918,7 @@
         </div>
       </div>
 
-      <table class="compare-table">
+      <div class="table-scroll"><table class="compare-table">
         <thead>
           <tr>
             <th>Tiêu chí Branding</th>
@@ -907,6 +964,7 @@
           </tr>
         </tbody>
       </table>
+</div>
     </div>
 
     <!-- ========== SECTION 6: RECOMMENDATIONS ========== -->
@@ -975,7 +1033,7 @@
         <span class="section-title">Bảng tổng hợp số liệu — Feb vs Mar</span>
       </div>
 
-      <table class="compare-table">
+      <div class="table-scroll"><table class="compare-table">
         <thead>
           <tr>
             <th>Chỉ số</th>
@@ -1048,6 +1106,7 @@
           </tr>
         </tbody>
       </table>
+</div>
     </div>
 
   </div><!-- end body -->
