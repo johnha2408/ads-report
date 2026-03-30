@@ -443,11 +443,185 @@
     .footer { padding: 16px; font-size: 10px; }
   }
 
+  /* VIDEO SECTION */
+  .video-note {
+    display: flex;
+    gap: 10px;
+    background: var(--blue-light);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 14px;
+    font-size: 12px;
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .video-note code {
+    background: rgba(26,86,255,0.1);
+    color: var(--blue);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: monospace;
+  }
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .video-card {
+    background: var(--gray-100);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .video-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .video-card-client {
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .video-badge {
+    font-size: 10px;
+    background: var(--gray-200);
+    color: var(--gray-600);
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    margin-left: auto;
+  }
+  .video-stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .vstat {
+    background: white;
+    border-radius: 8px;
+    padding: 8px 6px;
+    text-align: center;
+  }
+  .vstat-label {
+    display: block;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray-400);
+    margin-bottom: 3px;
+  }
+  .vstat-val {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--black);
+  }
+  .video-embed-wrap {
+    border-radius: 8px;
+    overflow: hidden;
+    background: #1a1a1a;
+    margin-bottom: 10px;
+    aspect-ratio: 16/9;
+    position: relative;
+  }
+  .video-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    position: absolute;
+    inset: 0;
+  }
+  .placeholder-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+  }
+  .placeholder-text {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+  }
+  .embed-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .embed-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  .video-input-row {
+    display: flex;
+    gap: 6px;
+  }
+  .video-url-input {
+    flex: 1;
+    padding: 7px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--gray-200);
+    font-size: 12px;
+    background: white;
+    color: var(--black);
+    min-width: 0;
+  }
+  .video-url-input:focus {
+    outline: none;
+    border-color: var(--blue);
+  }
+  .video-load-btn {
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: none;
+    background: var(--black);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .video-load-btn:hover { background: #333; }
+  .video-clear-btn {
+    padding: 7px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--gray-200);
+    background: white;
+    color: var(--gray-600);
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .video-grid { grid-template-columns: 1fr; }
+    .video-stats-row { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .video-stats-row { grid-template-columns: repeat(2, 1fr); }
+    .video-badge { margin-left: 0; }
+  }
+
   @media print {
     .page { max-width: 100%; }
     .cover { padding: 40px; }
     .body { padding: 32px 40px; }
     .page-break { page-break-before: always; }
+    .video-input-row { display: none; }
   }
 </style>
 </head>
@@ -820,10 +994,88 @@
       </div>
     </div>
 
-    <!-- ========== SECTION 4: SO SÁNH 2 CLIENT ========== -->
+    <!-- ========== SECTION VIDEO ========== -->
     <div class="section">
       <div class="section-header">
         <span class="section-num">04</span>
+        <span class="section-title">Video Ads đang chạy — Xem & Đánh giá</span>
+      </div>
+      <p class="section-subtitle">Paste YouTube link vào ô bên dưới để xem preview ngay trong report</p>
+
+      <div class="video-note">
+        <div class="video-note-icon">ℹ️</div>
+        <div>
+          <strong>Cách lấy link video:</strong> Vào Google Ads → Campaigns → chọn campaign → tab "Ads &amp; assets" → click vào ad → copy YouTube URL từ "Final URL" hoặc xem trong YouTube Studio. Hiện tại data CSV cho thấy 2 ad groups đang chạy: <code>AG01_Video_Production_Interest</code> (Storimatic) và <code>AG03_Video_Production_Interest</code> (Omega).
+        </div>
+      </div>
+
+      <div class="video-grid">
+
+        <!-- STORIMATIC VIDEO -->
+        <div class="video-card">
+          <div class="video-card-header">
+            <div class="client-dot" style="background: var(--storimatic); width:10px; height:10px; border-radius:50%;"></div>
+            <span class="video-card-client" style="color: var(--storimatic);">Storimatic Studio</span>
+            <span class="video-badge">AG01 · Video Production Interest</span>
+          </div>
+          <div class="video-stats-row">
+            <div class="vstat"><span class="vstat-label">Impressions</span><span class="vstat-val">134,216</span></div>
+            <div class="vstat"><span class="vstat-label">Interactions</span><span class="vstat-val">87,903</span></div>
+            <div class="vstat"><span class="vstat-label">Int. Rate</span><span class="vstat-val">65.49%</span></div>
+            <div class="vstat"><span class="vstat-label">CPV</span><span class="vstat-val">236đ</span></div>
+          </div>
+          <div class="video-embed-wrap" id="wrap-storimatic">
+            <div class="video-placeholder" id="placeholder-storimatic">
+              <div class="placeholder-icon">▶</div>
+              <div class="placeholder-text">Paste YouTube link để xem video</div>
+            </div>
+            <div class="embed-container" id="embed-storimatic" style="display:none;">
+              <iframe id="iframe-storimatic" width="100%" height="100%" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            </div>
+          </div>
+          <div class="video-input-row">
+            <input type="text" class="video-url-input" id="input-storimatic" placeholder="https://www.youtube.com/watch?v=..." />
+            <button class="video-load-btn" onclick="loadVideo('storimatic')">Load</button>
+            <button class="video-clear-btn" onclick="clearVideo('storimatic')">✕</button>
+          </div>
+        </div>
+
+        <!-- OMEGA VIDEO -->
+        <div class="video-card">
+          <div class="video-card-header">
+            <div class="client-dot" style="background: var(--omega); width:10px; height:10px; border-radius:50%;"></div>
+            <span class="video-card-client" style="color: #b45309;">Omega Ready Mix</span>
+            <span class="video-badge">AG03 · Video Production Interest</span>
+          </div>
+          <div class="video-stats-row">
+            <div class="vstat"><span class="vstat-label">Impressions</span><span class="vstat-val">208,201</span></div>
+            <div class="vstat"><span class="vstat-label">Interactions</span><span class="vstat-val">148,164</span></div>
+            <div class="vstat"><span class="vstat-label">Int. Rate</span><span class="vstat-val">71.16%</span></div>
+            <div class="vstat"><span class="vstat-label">CPV</span><span class="vstat-val">135đ</span></div>
+          </div>
+          <div class="video-embed-wrap" id="wrap-omega">
+            <div class="video-placeholder" id="placeholder-omega">
+              <div class="placeholder-icon">▶</div>
+              <div class="placeholder-text">Paste YouTube link để xem video</div>
+            </div>
+            <div class="embed-container" id="embed-omega" style="display:none;">
+              <iframe id="iframe-omega" width="100%" height="100%" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            </div>
+          </div>
+          <div class="video-input-row">
+            <input type="text" class="video-url-input" id="input-omega" placeholder="https://www.youtube.com/watch?v=..." />
+            <button class="video-load-btn" onclick="loadVideo('omega')">Load</button>
+            <button class="video-clear-btn" onclick="clearVideo('omega')">✕</button>
+          </div>
+        </div>
+
+      </div><!-- end video-grid -->
+    </div>
+
+    <!-- ========== SECTION 4: SO SÁNH 2 CLIENT ========== -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">05</span>
         <span class="section-title">So sánh hiệu quả — Storimatic vs Omega</span>
       </div>
 
@@ -898,7 +1150,7 @@
     <!-- ========== SECTION 5: ĐÁNH GIÁ BRANDING ========== -->
     <div class="section">
       <div class="section-header">
-        <span class="section-num">05</span>
+        <span class="section-num">06</span>
         <span class="section-title">Đánh giá theo mục tiêu Branding Awareness</span>
       </div>
       <p class="section-subtitle">Campaigns chủ trọng traffic & brand reach — không đặt mục tiêu conversion</p>
@@ -970,7 +1222,7 @@
     <!-- ========== SECTION 6: RECOMMENDATIONS ========== -->
     <div class="section">
       <div class="section-header">
-        <span class="section-num">06</span>
+        <span class="section-num">07</span>
         <span class="section-title">Đề xuất & Kế hoạch tháng tiếp theo</span>
       </div>
 
@@ -1029,7 +1281,7 @@
     <!-- ========== SECTION 7: SUMMARY TABLE ========== -->
     <div class="section">
       <div class="section-header">
-        <span class="section-num">07</span>
+        <span class="section-num">08</span>
         <span class="section-title">Bảng tổng hợp số liệu — Feb vs Mar</span>
       </div>
 
@@ -1229,6 +1481,55 @@ function makeRadar(id, label, color, data) {
 
 makeRadar('radarStorimatic', 'Storimatic', '#1a56ff', [7, 7, 6, 9, 9]);
 makeRadar('radarOmega', 'Omega', '#f59e0b', [9, 8, 9, 9, 8]);
+
+// VIDEO LOADER
+function extractYouTubeID(url) {
+  url = url.trim();
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/,
+    /^([a-zA-Z0-9_-]{11})$/
+  ];
+  for (const p of patterns) {
+    const m = url.match(p);
+    if (m) return m[1];
+  }
+  return null;
+}
+
+function loadVideo(id) {
+  const input = document.getElementById('input-' + id);
+  const videoId = extractYouTubeID(input.value);
+  if (!videoId) {
+    input.style.borderColor = '#ef4444';
+    input.placeholder = 'Link không hợp lệ — thử lại';
+    setTimeout(() => { input.style.borderColor = ''; input.placeholder = 'https://www.youtube.com/watch?v=...'; }, 2000);
+    return;
+  }
+  document.getElementById('placeholder-' + id).style.display = 'none';
+  const embed = document.getElementById('embed-' + id);
+  embed.style.display = 'block';
+  document.getElementById('iframe-' + id).src = 'https://www.youtube.com/embed/' + videoId + '?rel=0&modestbranding=1';
+  input.style.borderColor = '#00b87c';
+}
+
+function clearVideo(id) {
+  document.getElementById('placeholder-' + id).style.display = 'flex';
+  const embed = document.getElementById('embed-' + id);
+  embed.style.display = 'none';
+  document.getElementById('iframe-' + id).src = '';
+  document.getElementById('input-' + id).value = '';
+  document.getElementById('input-' + id).style.borderColor = '';
+}
+
+// Allow pressing Enter to load
+document.querySelectorAll('.video-url-input').forEach(input => {
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const id = input.id.replace('input-', '');
+      loadVideo(id);
+    }
+  });
+});
 </script>
 </body>
 </html>
