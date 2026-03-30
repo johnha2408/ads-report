@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Ads Report — March 2026 | Storimatic Agency</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #fafafa;
+    --gray-100: #f4f4f4;
+    --gray-200: #e8e8e8;
+    --gray-400: #a0a0a0;
+    --gray-600: #585858;
+    --blue: #1a56ff;
+    --blue-light: #e8eeff;
+    --green: #00b87c;
+    --green-light: #e0f7ef;
+    --amber: #f59e0b;
+    --amber-light: #fef3c7;
+    --red: #ef4444;
+    --red-light: #fee2e2;
+    --storimatic: #1a56ff;
+    --omega: #f59e0b;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    color: var(--black);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    background: var(--white);
+    min-height: 100vh;
+  }
+
+  /* COVER */
+  .cover {
+    background: var(--black);
+    color: var(--white);
+    padding: 56px 56px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(26,86,255,0.15);
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 200px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(245,158,11,0.12);
+  }
+  .cover-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 20px;
+  }
+  .cover-title {
+    font-family: Arial, sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+  .cover-title span { color: var(--blue); }
+  .cover-sub {
+    font-size: 16px;
+    color: var(--gray-400);
+    margin-bottom: 40px;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .cover-meta-item label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-400);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .cover-meta-item span {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+  }
+  .client-badges {
+    display: flex;
+    gap: 8px;
+    margin-top: 28px;
+  }
+  .badge {
+    padding: 5px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .badge-storimatic { background: rgba(26,86,255,0.2); color: #6b9fff; }
+  .badge-omega { background: rgba(245,158,11,0.2); color: #fbbf24; }
+
+  /* BODY */
+  .body { padding: 48px 56px; }
+
+  /* SECTION */
+  .section { margin-bottom: 48px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid var(--gray-200);
+  }
+  .section-num {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gray-400);
+    letter-spacing: 0.08em;
+  }
+  .section-title {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--black);
+  }
+  .section-subtitle {
+    font-size: 13px;
+    color: var(--gray-600);
+    margin-top: -16px;
+    margin-bottom: 20px;
+  }
+
+  /* METRIC CARDS */
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .metrics-row-3 { grid-template-columns: repeat(3, 1fr); }
+  .metric-card {
+    background: var(--gray-100);
+    border-radius: 12px;
+    padding: 18px 16px;
+  }
+  .metric-card.highlight {
+    background: var(--black);
+    color: var(--white);
+  }
+  .metric-card.positive { background: var(--green-light); }
+  .metric-card.warning { background: var(--amber-light); }
+  .metric-card.negative { background: var(--red-light); }
+  .metric-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-600);
+    margin-bottom: 6px;
+  }
+  .metric-card.highlight .metric-label { color: var(--gray-400); }
+  .metric-val {
+    font-family: Arial, sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+  .metric-card.highlight .metric-val { color: var(--white); }
+  .metric-change {
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .up { color: var(--green); }
+  .down { color: var(--red); }
+  .neutral { color: var(--gray-600); }
+
+  /* COMPARISON TABLE */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .compare-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray-600);
+    font-weight: 600;
+    background: var(--gray-100);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .compare-table th:not(:first-child) { text-align: right; }
+  .compare-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--gray-200);
+    color: var(--black);
+    vertical-align: middle;
+  }
+  .compare-table td:not(:first-child) { text-align: right; }
+  .compare-table tr:last-child td { border-bottom: none; font-weight: 600; background: var(--gray-100); }
+  .compare-table .row-label { font-weight: 500; }
+
+  /* CHART WRAPPER */
+  .chart-wrap {
+    background: var(--gray-100);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .chart-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray-600);
+    margin-bottom: 14px;
+  }
+  .chart-legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: var(--gray-600);
+  }
+  .chart-legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  /* CLIENT DIVIDER */
+  .client-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 28px 0 16px;
+  }
+  .client-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  .client-name {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* INSIGHT BOXES */
+  .insights-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .insight-card {
+    background: var(--gray-100);
+    border-radius: 10px;
+    padding: 16px;
+    border-left: 3px solid var(--gray-200);
+  }
+  .insight-card.good { border-left-color: var(--green); background: var(--green-light); }
+  .insight-card.warn { border-left-color: var(--amber); background: var(--amber-light); }
+  .insight-card.bad { border-left-color: var(--red); background: var(--red-light); }
+  .insight-card.info { border-left-color: var(--blue); background: var(--blue-light); }
+  .insight-icon { font-size: 18px; margin-bottom: 6px; }
+  .insight-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; color: var(--black); }
+  .insight-text { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+
+  /* RECOMMENDATION */
+  .rec-list { list-style: none; }
+  .rec-item {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--black);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .rec-content { flex: 1; }
+  .rec-title { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+  .rec-desc { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+  .rec-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-top: 6px;
+  }
+  .tag-storimatic { background: var(--blue-light); color: var(--blue); }
+  .tag-omega { background: var(--amber-light); color: #b45309; }
+  .tag-both { background: var(--gray-200); color: var(--gray-600); }
+
+  /* FOOTER */
+  .footer {
+    background: var(--black);
+    color: var(--gray-400);
+    padding: 24px 56px;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer strong { color: var(--white); }
+
+  /* CAMPAIGN TABLE */
+  .camp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .camp-card {
+    background: var(--gray-100);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .camp-name {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray-600);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .camp-stat { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--gray-200); font-size: 12px; }
+  .camp-stat:last-child { border-bottom: none; }
+  .camp-stat-val { font-weight: 600; }
+
+  /* PAGE BREAK HINT */
+  @media print {
+    .page { max-width: 100%; }
+    .cover { padding: 40px; }
+    .body { padding: 32px 40px; }
+    .page-break { page-break-before: always; }
+  }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .pill-green { background: var(--green-light); color: #047857; }
+  .pill-red { background: var(--red-light); color: #b91c1c; }
+  .pill-amber { background: var(--amber-light); color: #b45309; }
+  .pill-blue { background: var(--blue-light); color: #1d4ed8; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-label">Storimatic Agency · Google Ads Performance</div>
+    <div class="cover-title">Monthly Ads<br>Report <span>March</span></div>
+    <div class="cover-sub">Campaign Performance — February vs March 2026</div>
+    <div class="client-badges">
+      <span class="badge badge-storimatic">Storimatic Studio</span>
+      <span class="badge badge-omega">Omega Ready Mix</span>
+    </div>
+    <div class="cover-meta" style="margin-top:32px;">
+      <div class="cover-meta-item">
+        <label>Period</label>
+        <span>Mar 1 – Mar 30, 2026</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Compared to</label>
+        <span>Feb 1 – Feb 27, 2026</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Campaign objective</label>
+        <span>Brand Awareness & Traffic</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Prepared by</label>
+        <span>Storimatic Agency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- ========== SECTION 1: TỔNG QUAN ACCOUNT ========== -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <span class="section-title">Account Overview — Tổng quan toàn tài khoản</span>
+      </div>
+      <p class="section-subtitle">Tổng hợp hiệu quả tất cả campaigns, so sánh tháng 3 vs tháng 2</p>
+
+      <div class="metrics-row">
+        <div class="metric-card highlight">
+          <div class="metric-label">Total Impressions</div>
+          <div class="metric-val">342,627</div>
+          <div class="metric-change up">▲ +715.95% vs T2</div>
+        </div>
+        <div class="metric-card positive">
+          <div class="metric-label">Total Clicks (Video)</div>
+          <div class="metric-val">595</div>
+          <div class="metric-change neutral">Video Interactions: 236,076</div>
+        </div>
+        <div class="metric-card warning">
+          <div class="metric-label">Total Cost (VND)</div>
+          <div class="metric-val">33.9M</div>
+          <div class="metric-change up">▲ +271.46% vs T2 (9.1M)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Avg. CPV (Video)</div>
+          <div class="metric-val">172đ</div>
+          <div class="metric-change down">▼ −15.66% vs T2 (204đ)</div>
+        </div>
+      </div>
+
+      <div class="metrics-row metrics-row-3">
+        <div class="metric-card positive">
+          <div class="metric-label">Video Interactions</div>
+          <div class="metric-val">236,076</div>
+          <div class="metric-change up">▲ +1,114.76% vs T2 (19,434)</div>
+        </div>
+        <div class="metric-card positive">
+          <div class="metric-label">Interaction Rate</div>
+          <div class="metric-val">68.90%</div>
+          <div class="metric-change up">▲ vs T2: 46.28%</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Search Clicks</div>
+          <div class="metric-val">9</div>
+          <div class="metric-change down">▼ −94.97% vs T2 (179)</div>
+        </div>
+      </div>
+
+      <!-- Chart: Impressions per day -->
+      <div class="chart-wrap">
+        <div class="chart-title">Impressions theo ngày — March vs February</div>
+        <div class="chart-legend">
+          <span><i class="dot" style="background:#1a56ff;"></i>March 2026</span>
+          <span><i class="dot" style="background:#e2e8ff;"></i>February 2026</span>
+        </div>
+        <div style="position:relative; height:220px;">
+          <canvas id="impressionChart"></canvas>
+        </div>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-card good">
+          <div class="insight-icon">📈</div>
+          <div class="insight-title">Impressions bùng nổ từ 13/3</div>
+          <div class="insight-text">Video campaigns bật lên mạnh từ ngày 13/3, đạt đỉnh ~40K/ngày (15–18/3). Đây là dấu hiệu budget được phân bổ đúng lúc và targeting hoạt động tốt.</div>
+        </div>
+        <div class="insight-card info">
+          <div class="insight-icon">🎯</div>
+          <div class="insight-title">CPV giảm — reach được nhiều hơn</div>
+          <div class="insight-text">CPV giảm từ 204đ xuống 172đ (−15.66%), tức mỗi đồng bỏ ra đang mua được nhiều view hơn. Phù hợp với mục tiêu branding awareness.</div>
+        </div>
+        <div class="insight-card warn">
+          <div class="insight-icon">⚠️</div>
+          <div class="insight-title">Search campaign gần như ngừng</div>
+          <div class="insight-text">Search clicks giảm 95% (từ 179 xuống 9). Các campaign search của tháng 2 đã kết thúc hoặc bị pause, không còn hoạt động trong tháng 3.</div>
+        </div>
+        <div class="insight-card good">
+          <div class="insight-icon">✅</div>
+          <div class="insight-title">Interaction rate rất cao: 68.9%</div>
+          <div class="insight-text">Tỷ lệ người xem video tương tác (click, watch) đạt 68.9% — mức rất cao với video ads, cho thấy nội dung đang thu hút đúng đối tượng mục tiêu.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SECTION 2: STORIMATIC STUDIO ========== -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <span class="section-title">Storimatic Studio</span>
+      </div>
+
+      <div class="client-header">
+        <div class="client-dot" style="background: var(--storimatic);"></div>
+        <span class="client-name" style="color: var(--storimatic);">Video Awareness Campaign — Calgary</span>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-card positive">
+          <div class="metric-label">Impressions (Video)</div>
+          <div class="metric-val">134,216</div>
+          <div class="metric-change up">▲ +1,116.83% vs T2 (11,030)</div>
+        </div>
+        <div class="metric-card positive">
+          <div class="metric-label">Interactions</div>
+          <div class="metric-val">87,903</div>
+          <div class="metric-change up">▲ vs T2: 7,294</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Interaction Rate</div>
+          <div class="metric-val">65.49%</div>
+          <div class="metric-change neutral">vs T2: 66.13% (ổn định)</div>
+        </div>
+        <div class="metric-card warning">
+          <div class="metric-label">Chi phí</div>
+          <div class="metric-val">16.7M</div>
+          <div class="metric-change up">▲ +1,494% vs T2 (1.05M)</div>
+        </div>
+      </div>
+
+      <div class="metrics-row metrics-row-3">
+        <div class="metric-card">
+          <div class="metric-label">Avg. CPV</div>
+          <div class="metric-val">236đ</div>
+          <div class="metric-change up">▲ +32.39% vs T2 (178đ)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Avg. CPM</div>
+          <div class="metric-val">124,301đ</div>
+          <div class="metric-change up">▲ +31.03% vs T2</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Landing Page Clicks</div>
+          <div class="metric-val">366</div>
+          <div class="metric-change neutral">Video + Search combined</div>
+        </div>
+      </div>
+
+      <!-- Landing page breakdown -->
+      <div class="chart-wrap" style="margin-bottom:16px;">
+        <div class="chart-title">Landing Page Traffic — Storimatic</div>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Landing Page</th>
+              <th>Clicks</th>
+              <th>Impressions</th>
+              <th>CTR</th>
+              <th>Avg. CPC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="row-label">YouTube (Video Awareness UTM)</td>
+              <td>358</td>
+              <td>134,216</td>
+              <td>0.27%</td>
+              <td>46,601đ</td>
+            </tr>
+            <tr>
+              <td class="row-label">storimaticstudio.com (homepage)</td>
+              <td>7</td>
+              <td>199</td>
+              <td>3.52%</td>
+              <td>39,870đ</td>
+            </tr>
+            <tr>
+              <td class="row-label">/video-production-calgary/</td>
+              <td>1</td>
+              <td>3</td>
+              <td>33.33%</td>
+              <td>28,084đ</td>
+            </tr>
+            <tr>
+              <td><strong>Total Storimatic</strong></td>
+              <td><strong>366</strong></td>
+              <td><strong>134,418</strong></td>
+              <td>—</td>
+              <td><strong>46,000đ avg</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-card good">
+          <div class="insight-icon">🚀</div>
+          <div class="insight-title">Scale lên mạnh, reach tăng 11x</div>
+          <div class="insight-text">Impressions tăng từ 11K lên 134K — video đang được phủ rộng đến đúng tệp khách hàng tại Calgary. Mục tiêu branding awareness đang đạt được.</div>
+        </div>
+        <div class="insight-card warn">
+          <div class="insight-icon">💸</div>
+          <div class="insight-title">CPV tăng 32% — cần theo dõi</div>
+          <div class="insight-text">CPV tăng từ 178đ lên 236đ khi scale budget. Bình thường khi tăng reach, nhưng nên monitor để đảm bảo không vượt ngưỡng hiệu quả.</div>
+        </div>
+      </div>
+
+      <!-- Search campaign note -->
+      <div class="client-header" style="margin-top:20px;">
+        <div class="client-dot" style="background: var(--gray-400);"></div>
+        <span class="client-name" style="color: var(--gray-600);">Search Campaign (SRC_Feb26_Storimatic) — Đã kết thúc</span>
+      </div>
+      <div class="metric-card" style="background: var(--gray-100); padding: 16px; border-radius: 10px;">
+        <div style="font-size:13px; color: var(--gray-600); line-height: 1.6;">
+          Campaign search tháng 2 (<strong>SRC_Feb26_Storimatic</strong>) đã dừng hoạt động trong tháng 3. Clicks giảm từ 129 xuống 8, cost từ 4.67M xuống 307K. 
+          Keyword targeting chủ yếu quanh "videographer", "video production calgary" — phù hợp để reactivate khi chuyển sang phase conversion.
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SECTION 3: OMEGA READY MIX ========== -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <span class="section-title">Omega Ready Mix</span>
+      </div>
+
+      <div class="client-header">
+        <div class="client-dot" style="background: var(--omega);"></div>
+        <span class="client-name" style="color: #b45309;">Video Awareness Campaign — Alberta/Calgary</span>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-card positive">
+          <div class="metric-label">Impressions (Video)</div>
+          <div class="metric-val">208,201</div>
+          <div class="metric-change up">▲ +1,210.18% vs T2 (15,891)</div>
+        </div>
+        <div class="metric-card positive">
+          <div class="metric-label">Interactions</div>
+          <div class="metric-val">148,164</div>
+          <div class="metric-change up">▲ vs T2: 10,413</div>
+        </div>
+        <div class="metric-card positive">
+          <div class="metric-label">Interaction Rate</div>
+          <div class="metric-val">71.16%</div>
+          <div class="metric-change up">▲ vs T2: 65.53%</div>
+        </div>
+        <div class="metric-card warning">
+          <div class="metric-label">Chi phí</div>
+          <div class="metric-val">16.9M</div>
+          <div class="metric-change up">▲ +1,281% vs T2 (1.22M)</div>
+        </div>
+      </div>
+
+      <div class="metrics-row metrics-row-3">
+        <div class="metric-card positive">
+          <div class="metric-label">Avg. CPV</div>
+          <div class="metric-val">135đ</div>
+          <div class="metric-change down">▼ −9.29% vs T2 (149đ)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Avg. CPM</div>
+          <div class="metric-val">81,158đ</div>
+          <div class="metric-change up">▲ +5.41% vs T2</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Landing Clicks</div>
+          <div class="metric-val">238</div>
+          <div class="metric-change neutral">Video + Search combined</div>
+        </div>
+      </div>
+
+      <!-- Landing page breakdown -->
+      <div class="chart-wrap" style="margin-bottom:16px;">
+        <div class="chart-title">Landing Page Traffic — Omega Ready Mix</div>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Landing Page</th>
+              <th>Clicks</th>
+              <th>Impressions</th>
+              <th>CTR</th>
+              <th>Avg. CPC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="row-label">YouTube (Video Awareness UTM)</td>
+              <td>164</td>
+              <td>133,572</td>
+              <td>0.12%</td>
+              <td>66,332đ</td>
+            </tr>
+            <tr>
+              <td class="row-label">omegareadymix.ca (homepage)</td>
+              <td>73</td>
+              <td>74,629</td>
+              <td>0.10%</td>
+              <td>82,447đ</td>
+            </tr>
+            <tr>
+              <td class="row-label">omegareadymix.ca (Advertiser)</td>
+              <td>1</td>
+              <td>73</td>
+              <td>1.37%</td>
+              <td>582đ</td>
+            </tr>
+            <tr>
+              <td><strong>Total Omega</strong></td>
+              <td><strong>238</strong></td>
+              <td><strong>208,274</strong></td>
+              <td>—</td>
+              <td><strong>70,000đ avg</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-card good">
+          <div class="insight-icon">⭐</div>
+          <div class="insight-title">CPV thấp nhất — hiệu quả nhất</div>
+          <div class="insight-text">CPV 135đ và giảm thêm 9.29% — Omega video campaign đang mua được view rẻ nhất trong account. Interaction rate 71.16% cũng cao hơn Storimatic.</div>
+        </div>
+        <div class="insight-card warn">
+          <div class="insight-icon">🔍</div>
+          <div class="insight-title">Search campaign gần dừng hoàn toàn</div>
+          <div class="insight-text">Search clicks giảm 98% (từ 50 xuống 1), cost từ 1.45M xuống 582đ. Campaign SRC_Omega_ReadyMix gần như không còn hoạt động tháng 3.</div>
+        </div>
+        <div class="insight-card bad">
+          <div class="insight-icon">🚫</div>
+          <div class="insight-title">Video Placement cũ đã bị pause</div>
+          <div class="insight-text">Campaign Video_Omega_Ready_Mix_Placement (Jan 2026) bị pause hoàn toàn — mất toàn bộ impressions từ các placement YouTube cũ (10,765 impr tháng 2).</div>
+        </div>
+        <div class="insight-card info">
+          <div class="insight-icon">📍</div>
+          <div class="insight-title">Targeting Alberta hiệu quả</div>
+          <div class="insight-text">Video reach phủ tốt tại Alberta — đúng thị trường mục tiêu của Omega. Nên tiếp tục duy trì geo-targeting này cho các tháng tiếp theo.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SECTION 4: SO SÁNH 2 CLIENT ========== -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <span class="section-title">So sánh hiệu quả — Storimatic vs Omega</span>
+      </div>
+
+      <div class="chart-wrap">
+        <div class="chart-title">Impressions & Interactions — Tháng 3</div>
+        <div class="chart-legend">
+          <span><i class="dot" style="background:#1a56ff;"></i>Storimatic Studio</span>
+          <span><i class="dot" style="background:#f59e0b;"></i>Omega Ready Mix</span>
+        </div>
+        <div style="position:relative; height:200px;">
+          <canvas id="compareChart"></canvas>
+        </div>
+      </div>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Chỉ số</th>
+            <th>Storimatic Studio</th>
+            <th>Omega Ready Mix</th>
+            <th>Đánh giá</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">Impressions</td>
+            <td>134,216</td>
+            <td>208,201</td>
+            <td><span class="pill pill-amber">Omega cao hơn</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Interactions</td>
+            <td>87,903</td>
+            <td>148,164</td>
+            <td><span class="pill pill-amber">Omega cao hơn</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Interaction Rate</td>
+            <td>65.49%</td>
+            <td>71.16%</td>
+            <td><span class="pill pill-amber">Omega tốt hơn</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Avg. CPV</td>
+            <td>236đ</td>
+            <td>135đ</td>
+            <td><span class="pill pill-blue">Omega rẻ hơn 43%</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Chi phí tháng 3</td>
+            <td>~16.7M VND</td>
+            <td>~16.9M VND</td>
+            <td><span class="pill pill-green">Tương đương</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Landing Clicks</td>
+            <td>366</td>
+            <td>238</td>
+            <td><span class="pill pill-blue">Storimatic cao hơn</span></td>
+          </tr>
+          <tr>
+            <td><strong>Tổng kết</strong></td>
+            <td><strong>Reach tốt, landing click nhiều hơn</strong></td>
+            <td><strong>CPV rẻ hơn, interaction rate cao hơn</strong></td>
+            <td><span class="pill pill-green">Cả 2 đều ổn</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ========== SECTION 5: ĐÁNH GIÁ BRANDING ========== -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <span class="section-title">Đánh giá theo mục tiêu Branding Awareness</span>
+      </div>
+      <p class="section-subtitle">Campaigns chủ trọng traffic & brand reach — không đặt mục tiêu conversion</p>
+
+      <div class="two-col" style="margin-bottom:16px;">
+        <div class="chart-wrap" style="margin-bottom:0;">
+          <div class="chart-title">Branding Score — Storimatic</div>
+          <div style="position:relative; height:160px;">
+            <canvas id="radarStorimatic"></canvas>
+          </div>
+        </div>
+        <div class="chart-wrap" style="margin-bottom:0;">
+          <div class="chart-title">Branding Score — Omega</div>
+          <div style="position:relative; height:160px;">
+            <canvas id="radarOmega"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Tiêu chí Branding</th>
+            <th>Storimatic</th>
+            <th>Omega</th>
+            <th>Benchmark tốt</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">Reach (Impressions/budget)</td>
+            <td><span class="pill pill-blue">134K impr / 16.7M</span></td>
+            <td><span class="pill pill-green">208K impr / 16.9M</span></td>
+            <td>>100K/tháng</td>
+          </tr>
+          <tr>
+            <td class="row-label">Video Completion (Interaction rate)</td>
+            <td><span class="pill pill-blue">65.49%</span></td>
+            <td><span class="pill pill-green">71.16%</span></td>
+            <td>>50% là tốt</td>
+          </tr>
+          <tr>
+            <td class="row-label">CPV hiệu quả</td>
+            <td><span class="pill pill-amber">236đ — cần tối ưu</span></td>
+            <td><span class="pill pill-green">135đ — rất tốt</span></td>
+            <td>&lt;300đ</td>
+          </tr>
+          <tr>
+            <td class="row-label">Tăng trưởng so T2</td>
+            <td><span class="pill pill-green">+1,116%</span></td>
+            <td><span class="pill pill-green">+1,210%</span></td>
+            <td>Scale đúng hướng</td>
+          </tr>
+          <tr>
+            <td class="row-label">Geo targeting chính xác</td>
+            <td><span class="pill pill-green">Calgary ✓</span></td>
+            <td><span class="pill pill-green">Alberta ✓</span></td>
+            <td>Đúng market</td>
+          </tr>
+          <tr>
+            <td><strong>Kết luận</strong></td>
+            <td colspan="3"><strong>Cả 2 campaigns đang đạt mục tiêu branding awareness — reach tăng mạnh, CPV trong ngưỡng chấp nhận được. Đúng hướng.</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ========== SECTION 6: RECOMMENDATIONS ========== -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <span class="section-title">Đề xuất & Kế hoạch tháng tiếp theo</span>
+      </div>
+
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-num">1</div>
+          <div class="rec-content">
+            <div class="rec-title">Duy trì Video campaign — tăng budget có kiểm soát</div>
+            <div class="rec-desc">Cả 2 video campaign đang cho kết quả tốt với interaction rate >65%. Tháng 4 nên tăng budget thêm 20–30% cho Omega (CPV thấp hơn, hiệu quả hơn) trước. Monitor CPV Storimatic — nếu vượt 300đ thì cần review bid strategy.</div>
+            <span class="rec-tag tag-both">Cả 2 client</span>
+          </div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-num">2</div>
+          <div class="rec-content">
+            <div class="rec-title">Reactivate Search campaign cho Storimatic (small budget)</div>
+            <div class="rec-desc">Search campaign tháng 2 hoạt động tốt (CTR ~4.29%, 179 clicks), targeting đúng intent "video production calgary". Nên bật lại với budget nhỏ (~5M/tháng) để capture bottom-funnel traffic song song với video branding.</div>
+            <span class="rec-tag tag-storimatic">Storimatic Studio</span>
+          </div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-num">3</div>
+          <div class="rec-content">
+            <div class="rec-title">Tạo video creative mới cho Storimatic — A/B test CPV</div>
+            <div class="rec-desc">CPV Storimatic tăng 32% khi scale. Nguyên nhân có thể do creative cũ bị ad fatigue. Nên tạo 1–2 video hook mới (15s), test song song để hạ CPV xuống mức tối ưu.</div>
+            <span class="rec-tag tag-storimatic">Storimatic Studio</span>
+          </div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-num">4</div>
+          <div class="rec-content">
+            <div class="rec-title">Omega: Reactivate Search hoặc thêm Placement targeting mới</div>
+            <div class="rec-desc">Search campaign Omega gần như ngừng hẳn (1 click). Cân nhắc reactivate với budget nhỏ targeting "ready mix concrete Calgary", "concrete supplier Alberta". Hoặc thêm YouTube placement mới thay cho campaign đã pause để mở rộng reach video.</div>
+            <span class="rec-tag tag-omega">Omega Ready Mix</span>
+          </div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-num">5</div>
+          <div class="rec-content">
+            <div class="rec-title">Setup Conversion tracking — chuẩn bị cho phase tiếp theo</div>
+            <div class="rec-desc">Hiện tại chưa có conversion nào được ghi nhận (0 conversions toàn account). Dù focus branding, nên setup tracking form submit / call / page visit để có baseline data khi chuyển sang phase conversion. Không tốn thêm budget, chỉ cần setup Google Tag.</div>
+            <span class="rec-tag tag-both">Cả 2 client</span>
+          </div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-num">6</div>
+          <div class="rec-content">
+            <div class="rec-title">Retargeting audience từ video viewers</div>
+            <div class="rec-desc">Với 236K interactions tháng 3, đã build được audience list lớn (người đã xem video). Tháng tới có thể chạy retargeting campaign nhắm vào tệp này với message cụ thể hơn (quote request, service page) — chi phí thấp hơn prospecting.</div>
+            <span class="rec-tag tag-both">Cả 2 client</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ========== SECTION 7: SUMMARY TABLE ========== -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <span class="section-title">Bảng tổng hợp số liệu — Feb vs Mar</span>
+      </div>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Chỉ số</th>
+            <th>Tháng 2</th>
+            <th>Tháng 3</th>
+            <th>Thay đổi</th>
+            <th>Xu hướng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">Total Impressions</td>
+            <td>41,991</td>
+            <td>342,627</td>
+            <td>+300,636</td>
+            <td><span class="pill pill-green">▲ +715.95%</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Video Interactions</td>
+            <td>19,434</td>
+            <td>236,076</td>
+            <td>+216,642</td>
+            <td><span class="pill pill-green">▲ +1,114.76%</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Interaction Rate</td>
+            <td>46.28%</td>
+            <td>68.90%</td>
+            <td>+22.62%</td>
+            <td><span class="pill pill-green">▲ +48.88%</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Avg. CPV</td>
+            <td>204đ</td>
+            <td>172đ</td>
+            <td>−32đ</td>
+            <td><span class="pill pill-green">▼ −15.66% (tốt)</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Avg. CPM</td>
+            <td>217,258đ</td>
+            <td>98,907đ</td>
+            <td>−118,351đ</td>
+            <td><span class="pill pill-green">▼ −54.48% (tốt)</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Total Cost</td>
+            <td>9,122,881đ</td>
+            <td>33,888,083đ</td>
+            <td>+24.77M</td>
+            <td><span class="pill pill-amber">▲ +271.46% (scale up)</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Search Clicks</td>
+            <td>179</td>
+            <td>9</td>
+            <td>−170</td>
+            <td><span class="pill pill-red">▼ −94.97% (camp dừng)</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Conversions</td>
+            <td>0</td>
+            <td>0</td>
+            <td>—</td>
+            <td><span class="pill pill-amber">Branding phase</span></td>
+          </tr>
+          <tr>
+            <td><strong>Đánh giá tổng thể</strong></td>
+            <td colspan="4"><strong>Tháng 3 scale mạnh về branding — reach tăng 7x, CPV giảm, interaction rate cao. Phù hợp với mục tiêu awareness. Cần bổ sung search để capture traffic intent.</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- end body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div><strong>Storimatic Agency</strong> · Google Ads Performance Report · March 2026</div>
+    <div>Prepared: March 30, 2026 · Confidential</div>
+  </div>
+
+</div><!-- end page -->
+
+<script>
+// IMPRESSIONS CHART (daily trend)
+const marData = [276,0,86,252,182,211,266,1707,2553,2168,1903,9763,11617,29900,37986,39816,38664,35900,35566,32351,27586,33826,0,0,0,0,0,9,8,19,12];
+const febData = [null,8974,1831,1995,1980,2937,3517,3796,1962,2558,2353,2327,2465,2321,66,104,100,203,194,176,144,168,186,275,252,288,427,392,null,null,null];
+const days = Array.from({length:31}, (_,i) => `${i+1}`);
+
+const ctx1 = document.getElementById('impressionChart').getContext('2d');
+new Chart(ctx1, {
+  type: 'line',
+  data: {
+    labels: days,
+    datasets: [
+      {
+        label: 'March 2026',
+        data: marData,
+        borderColor: '#1a56ff',
+        backgroundColor: 'rgba(26,86,255,0.08)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 0,
+        borderWidth: 2,
+      },
+      {
+        label: 'February 2026',
+        data: febData,
+        borderColor: '#d0d8ff',
+        backgroundColor: 'transparent',
+        fill: false,
+        tension: 0.4,
+        pointRadius: 0,
+        borderWidth: 1.5,
+        borderDash: [4,3],
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 10 }, maxTicksLimit: 10 } },
+      y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 10 }, callback: v => v >= 1000 ? (v/1000).toFixed(0)+'K' : v } }
+    }
+  }
+});
+
+// COMPARE CHART
+const ctx2 = document.getElementById('compareChart').getContext('2d');
+new Chart(ctx2, {
+  type: 'bar',
+  data: {
+    labels: ['Impressions', 'Interactions', 'Landing Clicks'],
+    datasets: [
+      {
+        label: 'Storimatic Studio',
+        data: [134216, 87903, 366],
+        backgroundColor: '#1a56ff',
+        borderRadius: 6,
+      },
+      {
+        label: 'Omega Ready Mix',
+        data: [208201, 148164, 238],
+        backgroundColor: '#f59e0b',
+        borderRadius: 6,
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+      y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 10 }, callback: v => v >= 1000 ? (v/1000).toFixed(0)+'K' : v } }
+    }
+  }
+});
+
+// RADAR CHARTS
+function makeRadar(id, label, color, data) {
+  const ctx = document.getElementById(id).getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['Reach', 'Interaction\nRate', 'CPV\nEfficiency', 'Growth', 'Geo\nPrecision'],
+      datasets: [{
+        label,
+        data,
+        backgroundColor: color + '22',
+        borderColor: color,
+        borderWidth: 2,
+        pointBackgroundColor: color,
+        pointRadius: 3,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        r: {
+          min: 0, max: 10,
+          ticks: { display: false },
+          grid: { color: 'rgba(0,0,0,0.08)' },
+          pointLabels: { font: { size: 9 }, color: '#585858' }
+        }
+      }
+    }
+  });
+}
+
+makeRadar('radarStorimatic', 'Storimatic', '#1a56ff', [7, 7, 6, 9, 9]);
+makeRadar('radarOmega', 'Omega', '#f59e0b', [9, 8, 9, 9, 8]);
+</script>
+</body>
+</html>
